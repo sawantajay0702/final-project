@@ -1,0 +1,61 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<form class="form" action="" [formGroup]="searchFG">
+  <input class="inp" type="text" placeholder="Enter City" [formControl]="city">
+  <input class="inp" type="number" placeholder="Minimum Rating" [formControl]="minRating">
+  <input class="inp" type="number" placeholder="maximun Rating"  [formControl]="maxRating">
+     <button class="btn" (click)="filterHotels()" [disabled]="searchFG.invalid">Search</button>
+</form>
+
+
+
+<section class="main">
+
+  <div class="hotels">
+   
+    @for(hotel of hotels;track hotel.id){
+    <div class="hotel">
+        <div class="field">
+           <h4>Hotel NAme:-</h4>
+           <p>{{hotel.name}}</p>
+        </div>
+        <div class="field">
+          <img [src]=hotel.imageUrl alt="image">
+       </div>
+       <div class="field">
+        <h4>City:-</h4>
+        <p>{{hotel.city}}</p>
+     </div>
+     <div class="field">
+      <h4>Rating:-</h4>
+      <p>{{hotel.rating}}</p>
+   </div>
+   <div class="field">
+    <h4>Price:-</h4>
+    <p>{{hotel.roomPrice}}</p>
+ </div>
+ <div class="field">
+  @if(hotel.gym){
+  <i class="fa-solid fa-dumbbell"></i>
+  }
+</div>
+<div class="field">
+  @if(hotel.pool){
+    <i class="fa-solid fa-person-swimming"></i>
+    }
+</div>
+<div class="field">
+  @if(hotel.wifi){
+    <i class="fa-solid fa-wifi"></i>
+    }
+</div>
+       
+    </div>
+  }
+     
+    
+  </div>
+
+
+</section>

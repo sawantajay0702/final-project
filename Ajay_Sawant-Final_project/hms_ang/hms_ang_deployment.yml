@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hms_ang_deployment
+  labels:
+    app: hms_ang_deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: hms_ang_deployment
+  template:
+    metadata:
+      labels:
+        app: hms_ang_deployment
+    spec:
+      containers:
+        - name: hms-ang-cont
+          image: ajay_sawant-final_project-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  hms_ang_service
+spec:
+  type: LoadBalancer  # Use LoadBalancer if you want external access
+  selector:
+    app:  hms_ang_deployment
+  ports:
+    - protocol: TCP
+      port: 80    # Exposed service port
+      targetPort: 80  # Container port where Spring Boot app is running

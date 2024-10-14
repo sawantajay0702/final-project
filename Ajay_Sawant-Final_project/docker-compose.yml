@@ -1,0 +1,29 @@
+version: '3.8'
+
+networks:
+  hms-netwok:
+    driver: bridge
+
+services:
+  backend:
+    container_name: hms-cont
+    build:
+      context: ./hms
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - hms-netwok
+
+  frontend:
+    container_name: hms-ang-cont
+    build:
+      context: ./hms_ang
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - hms-netwok
+
